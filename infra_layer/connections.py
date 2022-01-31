@@ -90,10 +90,22 @@ class APIConnections:
     def add_user(self, json):
         return self.get_request(con.api['users']['add_user'], 'Something was wrong with adding new user', json, 'POST')
 
+    """
+    add new playlist to user
+    {
+        'user_name': 'user_name',
+        'user_password': 'user_password',
+        'playlist_name: 'playlist_name'
+    }
+    """
+    def add_playlist(self, json):
+        return self.get_request(con.api['users']['add_playlist'], 'Something was wrong with adding new playlist',
+                                json, 'POST')
+
 
 con = APIConnections()
 user = {
-    "playlist_name": "myplaylist",
+    "playlist_name": "my new playlist",
     "user_name": "Arnold",
     "user_password": "topsicret",
     "friend_name": 'Eytan',
@@ -103,11 +115,16 @@ new_user = {
     'user_name': 'Denys',
     'user_password': 'mypass'
 }
-# print(con.get_user(user))
+new_playlist = {
+    'user_name': 'Denys',
+    'user_password': 'mypass'
+}
+print(con.get_user(user))
 # print(con.get_playlist(user))
 # req = requests.put(con.url + 'users/add_friend', json=user, timeout=0.1)
 # print(con.add_friend(user))
 # print(con.change_password(user))
 # print(con.add_user(new_user))
+# print(con.add_playlist(user))
 
 
