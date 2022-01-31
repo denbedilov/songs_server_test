@@ -140,7 +140,7 @@ class APIConnections:
                                 json, 'POST')
 
     """
-    down vote song
+    down vote the song
     {
         'playlist_name': 'playlist_name',
         'song_title': 'song_title',
@@ -154,22 +154,41 @@ class APIConnections:
                                 json, 'PUT')
 
     """
+    return song by its name
+    {
+        'song_title': 'song_title'
+    }
     """
 
-    def get_song(self):
-        pass
+    def get_song(self, params):
+        return self.get_request(con.api['songs']['get_song'], 'Something was wrong with getting song', params, 'GET')
 
     """
+    return list of songs by its rating
+    rating can be less, greater or equal to specified
+    {
+        'rank': 'rank',
+        'op': 'less/eq/greater'
+    }
     """
 
-    def ranked_songs(self):
-        pass
+    def ranked_songs(self, params):
+        return self.get_request(con.api['songs']['ranked_songs'], 'Something was wrong with getting ranked songs',
+                                params, 'GET')
 
     """
+    up vote the song
+    {
+        'playlist_name': 'playlist_name',
+        'song_title': 'song_title',
+        'user_name': 'user_name',
+        'user_password': 'user_password'
+    }
     """
 
-    def up_vote(self):
-        pass
+    def up_vote(self, json):
+        return self.get_request(con.api['songs']['upvote'], 'Something was wrong with up voting song',
+                                json, 'PUT')
 
     """
     add song to playlist
@@ -217,6 +236,10 @@ song_to_playlist = {
     'user_name': 'Arnold',
     'user_password': 'topsicret'
 }
+rank = {
+    'rank': 3,
+    'op': 'greater'
+}
 # print(con.get_user(user))
 # print(con.get_playlist(user))
 # req = requests.put(con.url + 'users/add_friend', json=user, timeout=0.1)
@@ -226,4 +249,7 @@ song_to_playlist = {
 # print(con.add_playlist(user))
 # print(con.add_song(song))
 # print(con.add_song_to_playlist(song_to_playlist))
-print(con.down_vote(song_to_playlist))
+# print(con.down_vote(song_to_playlist))
+# print(con.get_song(song))
+# print(con.ranked_songs(rank))
+print(con.up_vote(song_to_playlist))
