@@ -27,6 +27,8 @@ class APIConnections:
                 req = requests.get(con.url + request, params=params, timeout=self.timeout)
             elif option == 'PUT':
                 req = requests.put(con.url + request, json=params, timeout=self.timeout)
+            elif option == 'POST':
+                req = requests.post(con.url + request, json=params, timeout=self.timeout)
             if req.status_code == 200:
                 return req.json()
             else:
@@ -40,9 +42,8 @@ class APIConnections:
         'user_name' : 'username'
     }
     """
-
-    def get_user(self, user):
-        return self.get_request(con.api['users']['get_user'], 'Something was wrong with getting user', user, 'GET')
+    def get_user(self, params):
+        return self.get_request(con.api['users']['get_user'], 'Something was wrong with getting user', params, 'GET')
 
     """
     return user playlist
@@ -52,9 +53,8 @@ class APIConnections:
         'playlist_name': 'playlist_name'
     }
     """
-
-    def get_playlist(self, user):
-        return self.get_request(con.api['users']['get_playlist'], 'Something was wrong with getting playlist', user,
+    def get_playlist(self, params):
+        return self.get_request(con.api['users']['get_playlist'], 'Something was wrong with getting playlist', params,
                                 'GET')
 
     """
@@ -65,8 +65,30 @@ class APIConnections:
         'friend_name': 'friend_name'
     }
     """
-    def add_friend(self, user):
-        return self.get_request(con.api['users']['add_friend'], 'Something was wrong with adding friend', user, 'PUT')
+    def add_friend(self, json):
+        return self.get_request(con.api['users']['add_friend'], 'Something was wrong with adding friend', json, 'PUT')
+
+    """
+    change user password
+    {
+        'user_name': 'username',
+        'user_password': 'password',
+        'user_new_password': 'user_new_password'
+    }
+    """
+    def change_password(self, json):
+        return self.get_request(con.api['users']['change_password'], 'Something was wrong with changing password',
+                                json, 'PUT')
+
+    """
+    add new user
+    {
+        'user_name': 'user_name',
+        'user_password': 'user_password'
+    }
+    """
+    def add_user(self, json):
+        return self.get_request(con.api['users']['add_user'], 'Something was wrong with adding new user', json, 'POST')
 
 
 con = APIConnections()
@@ -74,10 +96,18 @@ user = {
     "playlist_name": "myplaylist",
     "user_name": "Arnold",
     "user_password": "topsicret",
-    "friend_name": 'Eytan'
+    "friend_name": 'Eytan',
+    # 'user_new_password': 'topsicret'
 }
-
+new_user = {
+    'user_name': 'Denys',
+    'user_password': 'mypass'
+}
 # print(con.get_user(user))
 # print(con.get_playlist(user))
 # req = requests.put(con.url + 'users/add_friend', json=user, timeout=0.1)
-print(con.add_friend(user))
+# print(con.add_friend(user))
+# print(con.change_password(user))
+# print(con.add_user(new_user))
+
+
