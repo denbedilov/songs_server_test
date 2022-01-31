@@ -15,8 +15,25 @@ class APIConnections:
             'change_password': 'users/change_password',
             'get_playlist': 'users/get_playlist',
             'get_user': 'users/get_user'
+        },
+        'songs': {
+            'add_song': 'songs/add_song',
+            'down_vote': 'songs/downvote',
+            'get_song': 'songs/get_song',
+            'ranked_songs': 'songs/ranked_songs',
+            'upvote': 'songs/upvote'
+        },
+        'playlists': {
+            'add_song': 'playlists/add_song'
+        },
+        'admin': {
+            'delete_all_songs': 'admin/delete_all_songs',
+            'delete_all_users': 'admin/delete_all_users',
+            'set_songs': 'admin/set_songs',
+            'set_users': 'admin/set_users'
         }
     }
+
     # timeout for connection
     timeout = 0.01
 
@@ -42,6 +59,7 @@ class APIConnections:
         'user_name' : 'username'
     }
     """
+
     def get_user(self, params):
         return self.get_request(con.api['users']['get_user'], 'Something was wrong with getting user', params, 'GET')
 
@@ -53,6 +71,7 @@ class APIConnections:
         'playlist_name': 'playlist_name'
     }
     """
+
     def get_playlist(self, params):
         return self.get_request(con.api['users']['get_playlist'], 'Something was wrong with getting playlist', params,
                                 'GET')
@@ -65,6 +84,7 @@ class APIConnections:
         'friend_name': 'friend_name'
     }
     """
+
     def add_friend(self, json):
         return self.get_request(con.api['users']['add_friend'], 'Something was wrong with adding friend', json, 'PUT')
 
@@ -76,6 +96,7 @@ class APIConnections:
         'user_new_password': 'user_new_password'
     }
     """
+
     def change_password(self, json):
         return self.get_request(con.api['users']['change_password'], 'Something was wrong with changing password',
                                 json, 'PUT')
@@ -87,6 +108,7 @@ class APIConnections:
         'user_password': 'user_password'
     }
     """
+
     def add_user(self, json):
         return self.get_request(con.api['users']['add_user'], 'Something was wrong with adding new user', json, 'POST')
 
@@ -98,9 +120,73 @@ class APIConnections:
         'playlist_name: 'playlist_name'
     }
     """
+
     def add_playlist(self, json):
         return self.get_request(con.api['users']['add_playlist'], 'Something was wrong with adding new playlist',
                                 json, 'POST')
+
+    """
+    add song
+    {
+        'song_genre': 'song_genre',
+        'song_performer': 'song_performer',
+        'song_title': 'song_title',
+        'song_year': 'song_year'
+    }
+    """
+
+    def add_song(self, json):
+        return self.get_request(con.api['songs']['add_song'], 'Something was wrong with adding new song',
+                                json, 'POST')
+
+    """
+    down vote song
+    {
+        'playlist_name': 'playlist_name',
+        'song_title': 'song_title',
+        'user_name': 'user_name',
+        'user_password': 'user_password'
+    }
+    """
+
+    def down_vote(self, json):
+        return self.get_request(con.api['songs']['down_vote'], 'Something was wrong with down voting song',
+                                json, 'PUT')
+
+    """
+    """
+
+    def get_song(self):
+        pass
+
+    """
+    """
+
+    def ranked_songs(self):
+        pass
+
+    """
+    """
+
+    def up_vote(self):
+        pass
+
+    """
+    add song to playlist
+    {
+        'playlist_name': 'playlist_name',
+        'song_title': 'song_title',
+        'user_name': 'user_name',
+        'user_password': 'user_password'
+    }
+    """
+
+    def add_song_to_playlist(self, json):
+        return self.get_request(con.api['playlists']['add_song'], 'Something was wrong with adding song to playlist',
+                                json, 'POST')
+
+    """
+    """
 
 
 con = APIConnections()
@@ -119,12 +205,25 @@ new_playlist = {
     'user_name': 'Denys',
     'user_password': 'mypass'
 }
-print(con.get_user(user))
+song = {
+    "song_genre": "Rock",
+    "song_performer": "Creedence Clearwater Revival",
+    "song_title": "Run Through the Jungle",
+    "song_year": "1970"
+}
+song_to_playlist = {
+    'playlist_name': 'myplaylist',
+    'song_title': 'Run Through the Jungle',
+    'user_name': 'Arnold',
+    'user_password': 'topsicret'
+}
+# print(con.get_user(user))
 # print(con.get_playlist(user))
 # req = requests.put(con.url + 'users/add_friend', json=user, timeout=0.1)
 # print(con.add_friend(user))
 # print(con.change_password(user))
 # print(con.add_user(new_user))
 # print(con.add_playlist(user))
-
-
+# print(con.add_song(song))
+# print(con.add_song_to_playlist(song_to_playlist))
+print(con.down_vote(song_to_playlist))
