@@ -13,23 +13,31 @@ class APIConnections:
             'get_user': 'users/get_user'
         }
     }
-    params = {
-        'get_user': '?user_name='
-    }
+
     timeout = 0.01
 
-    def get_user(self, username):
+    def get_request(self, request, err_msg='There was an error', params=None,):
         try:
-            req = requests.get(con.url + con.api['users']['get_user'] + con.params['get_user'] + username,
-                               timeout=self.timeout)
+            req = requests.get(con.url + request, params=params, timeout=self.timeout)
             if req.status_code == 200:
                 return req.json()
             else:
-                return 'Something was wrong with getting user'
+                return err_msg
         except requests.ConnectionError:
             return 'There is no connection to the server'
 
+    def get_user(self, user):
+        return self.get_request(con.api['users']['get_user'], 'Something was wrong with getting user', user)
+
+    def get_playlist(self, user):
+        return self.get_request(con.api['users']['get_playlist'], 'Something was wrong with getting playlist', user)
+
 
 con = APIConnections()
-user = 'Arnold'
-print(con.get_user(user))
+user = {
+    'playlist_name': "myplaylist",
+    'user_name': "Arnold",
+    'user_password': "topsicret"
+}
+# print(con.get_user(user))
+print(con.get_playlist(user))
