@@ -17,3 +17,13 @@ user_with_friend = {
 # user to get after friend added
 get_user_with_friend = {'data': {'friends': ['best_friend'], 'playlists': [], 'user_name': 'friendly_user'},
                         'message': 'OK'}
+
+# user for password change test
+user_with_pass = {
+    'user_name': 'user_with_pass',
+    'user_password': 'pass',
+    'user_new_password': 'new_pass'
+}
+
+# user to get after password change
+get_user_with_pass = {'data': {'friends': [], 'playlists': [], 'user_name': 'user_with_pass'}, 'message': 'OK'}

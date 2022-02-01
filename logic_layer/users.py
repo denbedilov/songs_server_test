@@ -19,3 +19,8 @@ def remove_all_users():
 # add friend to user
 def add_friend(user):
     return connections.add_friend(user)
+
+
+# change user password
+def change_password(user):
+    return connections.change_password(user)
