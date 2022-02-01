@@ -1,14 +1,29 @@
-import unittest
 from logic_layer import users, data
 
 
-class TestUserLogic(unittest.TestCase):
-    def test_add_user(self):
-        users.add_user(data.user)
-        res = users.get_user(data.user)
-        expected = data.get_user
-        self.assertEqual(res, expected)
+# test add new user
+def test_add_user(remove_users):
+    users.add_user(data.user)
+    res = users.get_user(data.user)
+    expected = data.get_user
+    assert res, expected
 
 
-if __name__ == '__main__':
-    unittest.main()
+# test get user
+def test_get_user(remove_users):
+    users.add_user(data.user)
+    res = users.get_user(data.user)
+    expected = data.get_user
+    assert res, expected
+
+
+# test add friend
+def test_add_friend(remove_users):
+    users.add_user(data.user_with_friend)
+    users.add_friend(data.user_with_friend)
+    res = users.get_user(data.user_with_friend)
+    expected = data.get_user_with_friend
+    assert res, expected
+
+
+
