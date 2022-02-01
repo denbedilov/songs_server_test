@@ -40,13 +40,16 @@ class APIConnections:
     # general connection with params schema and basic exception catch
     def get_request(self, request, err_msg='There was an error', params=None, option='GET'):
         try:
+            req = None
             if option == 'GET':
-                req = requests.get(con.url + request, params=params, timeout=self.timeout)
+                req = requests.get(self.url + request, params=params, timeout=self.timeout)
             elif option == 'PUT':
-                req = requests.put(con.url + request, json=params, timeout=self.timeout)
+                req = requests.put(self.url + request, json=params, timeout=self.timeout)
             elif option == 'POST':
-                req = requests.post(con.url + request, json=params, timeout=self.timeout)
-            if req.status_code == 200:
+                req = requests.post(self.url + request, json=params, timeout=self.timeout)
+            elif option == 'DELETE':
+                req = requests.delete(self.url + request, timeout=self.timeout)
+            if req is not None and req.status_code == 200:
                 return req.json()
             else:
                 return err_msg + ' ' + str(req)
@@ -61,7 +64,7 @@ class APIConnections:
     """
 
     def get_user(self, params):
-        return self.get_request(con.api['users']['get_user'], 'Something was wrong with getting user', params, 'GET')
+        return self.get_request(self.api['users']['get_user'], 'Something was wrong with getting user', params, 'GET')
 
     """
     return user playlist
@@ -73,7 +76,7 @@ class APIConnections:
     """
 
     def get_playlist(self, params):
-        return self.get_request(con.api['users']['get_playlist'], 'Something was wrong with getting playlist', params,
+        return self.get_request(self.api['users']['get_playlist'], 'Something was wrong with getting playlist', params,
                                 'GET')
 
     """
@@ -86,7 +89,7 @@ class APIConnections:
     """
 
     def add_friend(self, json):
-        return self.get_request(con.api['users']['add_friend'], 'Something was wrong with adding friend', json, 'PUT')
+        return self.get_request(self.api['users']['add_friend'], 'Something was wrong with adding friend', json, 'PUT')
 
     """
     change user password
@@ -98,7 +101,7 @@ class APIConnections:
     """
 
     def change_password(self, json):
-        return self.get_request(con.api['users']['change_password'], 'Something was wrong with changing password',
+        return self.get_request(self.api['users']['change_password'], 'Something was wrong with changing password',
                                 json, 'PUT')
 
     """
@@ -110,7 +113,7 @@ class APIConnections:
     """
 
     def add_user(self, json):
-        return self.get_request(con.api['users']['add_user'], 'Something was wrong with adding new user', json, 'POST')
+        return self.get_request(self.api['users']['add_user'], 'Something was wrong with adding new user', json, 'POST')
 
     """
     add new playlist to user
@@ -122,7 +125,7 @@ class APIConnections:
     """
 
     def add_playlist(self, json):
-        return self.get_request(con.api['users']['add_playlist'], 'Something was wrong with adding new playlist',
+        return self.get_request(self.api['users']['add_playlist'], 'Something was wrong with adding new playlist',
                                 json, 'POST')
 
     """
@@ -136,7 +139,7 @@ class APIConnections:
     """
 
     def add_song(self, json):
-        return self.get_request(con.api['songs']['add_song'], 'Something was wrong with adding new song',
+        return self.get_request(self.api['songs']['add_song'], 'Something was wrong with adding new song',
                                 json, 'POST')
 
     """
@@ -150,7 +153,7 @@ class APIConnections:
     """
 
     def down_vote(self, json):
-        return self.get_request(con.api['songs']['down_vote'], 'Something was wrong with down voting song',
+        return self.get_request(self.api['songs']['down_vote'], 'Something was wrong with down voting song',
                                 json, 'PUT')
 
     """
@@ -161,7 +164,7 @@ class APIConnections:
     """
 
     def get_song(self, params):
-        return self.get_request(con.api['songs']['get_song'], 'Something was wrong with getting song', params, 'GET')
+        return self.get_request(self.api['songs']['get_song'], 'Something was wrong with getting song', params, 'GET')
 
     """
     return list of songs by its rating
@@ -173,7 +176,7 @@ class APIConnections:
     """
 
     def ranked_songs(self, params):
-        return self.get_request(con.api['songs']['ranked_songs'], 'Something was wrong with getting ranked songs',
+        return self.get_request(self.api['songs']['ranked_songs'], 'Something was wrong with getting ranked songs',
                                 params, 'GET')
 
     """
@@ -187,7 +190,7 @@ class APIConnections:
     """
 
     def up_vote(self, json):
-        return self.get_request(con.api['songs']['upvote'], 'Something was wrong with up voting song',
+        return self.get_request(self.api['songs']['upvote'], 'Something was wrong with up voting song',
                                 json, 'PUT')
 
     """
@@ -201,55 +204,57 @@ class APIConnections:
     """
 
     def add_song_to_playlist(self, json):
-        return self.get_request(con.api['playlists']['add_song'], 'Something was wrong with adding song to playlist',
+        return self.get_request(self.api['playlists']['add_song'], 'Something was wrong with adding song to playlist',
                                 json, 'POST')
 
     """
+    delete all songs data
     """
+    def delete_all_songs(self):
+        return self.get_request(self.api['admin']['delete_all_songs'],
+                                'Something was wrong with deleting all songs', None, 'DELETE')
 
+    """
+    delete all users data
+    """
+    def delete_all_users(self):
+        return self.get_request(self.api['admin']['delete_all_users'],
+                                'Something was wrong with deleting all users', None, 'DELETE')
 
-con = APIConnections()
-user = {
-    "playlist_name": "my new playlist",
-    "user_name": "Arnold",
-    "user_password": "topsicret",
-    "friend_name": 'Eytan',
-    # 'user_new_password': 'topsicret'
-}
-new_user = {
-    'user_name': 'Denys',
-    'user_password': 'mypass'
-}
-new_playlist = {
-    'user_name': 'Denys',
-    'user_password': 'mypass'
-}
-song = {
-    "song_genre": "Rock",
-    "song_performer": "Creedence Clearwater Revival",
-    "song_title": "Run Through the Jungle",
-    "song_year": "1970"
-}
-song_to_playlist = {
-    'playlist_name': 'myplaylist',
-    'song_title': 'Run Through the Jungle',
-    'user_name': 'Arnold',
-    'user_password': 'topsicret'
-}
-rank = {
-    'rank': 3,
-    'op': 'greater'
-}
-# print(con.get_user(user))
-# print(con.get_playlist(user))
-# req = requests.put(con.url + 'users/add_friend', json=user, timeout=0.1)
-# print(con.add_friend(user))
-# print(con.change_password(user))
-# print(con.add_user(new_user))
-# print(con.add_playlist(user))
-# print(con.add_song(song))
-# print(con.add_song_to_playlist(song_to_playlist))
-# print(con.down_vote(song_to_playlist))
-# print(con.get_song(song))
-# print(con.ranked_songs(rank))
-print(con.up_vote(song_to_playlist))
+    """
+    upload array of users
+    {   'users': {
+            "user": {
+                "password": "password",
+                "name": "name",
+                'friends': [],
+                'playlists': {}
+            },
+            "user": {
+                "password": "password",
+                "name": "name",
+                'friends': [],
+                'playlists': {}
+    }}
+    """
+    def set_users(self, json):
+        return self.get_request(self.api['admin']['set_users'], 'Something was wrong with setting users', json, 'POST')
+
+    """
+    upload array of songs
+    {
+    'songs': [{
+        "genre": "genre",
+        "performer": "performer",
+        "title": "title",
+        "year": 0,
+        "rating": 0},
+        {
+            "genre": "genre",
+            "performer": "performer",
+            "title": "title",
+            "year": 0,
+            "rating": 0}]}
+    """
+    def set_songs(self, json):
+        return self.get_request(self.api['admin']['set_songs'], 'Something was wrong with setting songs', json, 'POST')
