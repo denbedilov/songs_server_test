@@ -38,3 +38,15 @@ user_with_playlist = {
 # user to get after adding playlist
 get_user_with_playlist = {'data': {'friends': [], 'playlists': ['new_playlist'], 'user_name': 'user_with_playlist'},
                           'message': 'OK'}
+
+# song to add
+song = {
+    'song_genre': 'genre',
+    'song_performer': 'performer',
+    'song_title': 'title',
+    'song_year': 1900
+}
+
+# song to get
+get_song = {'data': {'genre': 'genre', 'performer': 'performer', 'rating': 0, 'title': 'title', 'year': '1900'},
+            'message': 'OK'}
