@@ -1,5 +1,6 @@
 import pytest
-from logic_layer import users, data
+from logic_layer import users
+from logic_layer.user import User
 
 
 # test basic user actions
@@ -7,33 +8,31 @@ from logic_layer import users, data
 @pytest.mark.basic
 @pytest.mark.users
 def test_add_user(remove_users):
-    users.add_user(data.user)
-    res = users.get_user(data.user)
-    expected = data.get_user
-    assert res, expected
+    user = User('user')
+    assert users.add_user(user.get_user()), users.get_res_add_user(user.get_user())
+    assert users.get_user(user.get_user()), users.get_res_get_user(user.get_user())
 
 
 # test get user
 @pytest.mark.basic
 @pytest.mark.users
 def test_get_user(remove_users):
-    users.add_user(data.user)
-    res = users.get_user(data.user)
-    expected = data.get_user
-    assert res, expected
+    user = User('user')
+    assert users.add_user(user.get_user()), users.get_res_add_user(user.get_user())
+    assert users.get_user(user.get_user()), users.get_res_get_user(user.get_user())
 
 
 # test add friend
 @pytest.mark.basic
 @pytest.mark.users
 def test_add_friend(remove_users):
-    users.add_user(data.user_with_friend)
-    users.add_friend(data.user_with_friend)
-    res = users.get_user(data.user_with_friend)
-    expected = data.get_user_with_friend
-    assert res, expected
+    user = User('user')
+    friend = 'friend'
+    assert users.add_friend(user.add_item('friend_name', friend)), users.get_res_add_friend(friend)
+    assert users.get_user(user.add_friend(friend)), users.get_res_get_user(user.get_user())
 
 
+"""
 # test change password
 @pytest.mark.basic
 @pytest.mark.users
@@ -63,3 +62,4 @@ def test_get_playlist(remove_users):
     res = users.get_user(data.user_with_playlist)
     expected = data.get_user_with_playlist
     assert res, expected
+"""
