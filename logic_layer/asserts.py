@@ -1,4 +1,4 @@
-from logic_layer import data, users
+from logic_layer import data, users, songs
 
 # file for all assert functions
 
@@ -36,3 +36,13 @@ def add_playlist(user):
 def get_playlist(user):
     return users.get_playlist(user.add_item(data.playlist_field, data.playlist)) == \
            users.get_res_empty_list()
+
+
+def add_song(song):
+    return songs.add_song(song.get_add_song_schema()) == \
+           songs.get_res_add_song(song.get_song())
+
+
+def get_song(song):
+    return songs.get_song(song.get_get_song_schema()) == \
+           songs.get_res_get_song(song.get_song())
