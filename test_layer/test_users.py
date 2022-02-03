@@ -1,5 +1,5 @@
 import pytest
-from logic_layer import users
+from logic_layer import asserts, data
 from logic_layer.user import User
 
 
@@ -8,59 +8,55 @@ from logic_layer.user import User
 @pytest.mark.basic
 @pytest.mark.users
 def test_add_user(remove_users):
-    user = User('user')
-    assert users.add_user(user.get_user()) == users.get_res_add_user(user.get_user())
-    assert users.get_user(user.get_user()) == users.get_res_get_user(user.get_user_for_print())
+    user = User(data.user_name)
+    assert asserts.add_user(user), data.assert_add_user
+    assert asserts.get_user(user), data.assert_get_user
 
 
 # test get user
 @pytest.mark.basic
 @pytest.mark.users
 def test_get_user(remove_users):
-    user = User('user')
-    assert users.add_user(user.get_user()) == users.get_res_add_user(user.get_user())
-    assert users.get_user(user.get_user()) == users.get_res_get_user(user.get_user_for_print())
+    user = User(data.user_name)
+    assert asserts.add_user(user), data.assert_add_user
+    assert asserts.get_user(user), data.assert_get_user
 
 
 # test add friend
 @pytest.mark.basic
 @pytest.mark.users
 def test_add_friend(remove_users):
-    user = User('user')
-    friend = 'friend'
-    assert users.add_user(user.get_user()) == users.get_res_add_user(user.get_user())
-    assert users.add_friend(user.add_item('friend_name', friend)) == users.get_res_add_friend(friend)
-    assert users.get_user(user.add_friend(friend)) == users.get_res_get_user(user.get_user_for_print())
+    user = User(data.user_name)
+    assert asserts.add_user(user), data.assert_add_user
+    assert asserts.add_friend(user), data.assert_add_friend
+    assert asserts.get_friend(user), data.assert_get_friend
 
 
 # test change password
 @pytest.mark.basic
 @pytest.mark.users
 def test_change_password(remove_users):
-    user = User('user')
-    assert users.add_user(user.get_user()) == users.get_res_add_user(user.get_user())
-    assert users.change_password(user.add_item('user_new_password', 'new_pass')) ==\
-           users.get_res_change_password(user.get_user_for_print())
+    user = User(data.user_name)
+    assert asserts.add_user(user), data.assert_add_user
+    assert asserts.change_password(user), data.assert_change_password
     # TODO add another check? something needs a new password
 
 
-"""
 # test add playlist
 @pytest.mark.basic
 @pytest.mark.users
 def test_add_playlist(remove_users):
-    users.add_user(data.user_with_playlist)
-    res = users.get_user(data.user_with_playlist)
-    expected = data.get_user_with_playlist
-    assert res, expected
+    user = User(data.user_name)
+    assert asserts.add_user(user), data.assert_add_user
+    assert asserts.add_playlist(user), data.assert_add_playlist
+    assert asserts.get_playlist(user), data.assert_get_playlist
 
 
 # test get playlist
 @pytest.mark.basic
 @pytest.mark.users
 def test_get_playlist(remove_users):
-    users.add_user(data.user_with_playlist)
-    res = users.get_user(data.user_with_playlist)
-    expected = data.get_user_with_playlist
-    assert res, expected
-"""
+    user = User(data.user_name)
+    assert asserts.add_user(user), data.assert_add_user
+    assert asserts.add_playlist(user), data.assert_add_playlist
+    assert asserts.get_playlist(user), data.assert_get_playlist

@@ -1,4 +1,4 @@
-import json
+from logic_layer import data
 from infra_layer import connections
 
 
@@ -8,15 +8,15 @@ def add_user(user):
 
 
 # return server response with data
-def get_response_ok(data):
-    obj = {'data': data,
+def get_response_ok(input_data):
+    obj = {'data': input_data,
            'message': 'OK'}
     return obj
 
 
 # return server response for add_user
 def get_res_add_user(user):
-    return get_response_ok(user["user_name"])
+    return get_response_ok(user[data.user_name_field])
 
 
 # get user from system
@@ -49,5 +49,26 @@ def change_password(user):
     return connections.change_password(user)
 
 
+# return server response for get_user
 def get_res_change_password(user):
     return get_res_get_user(user)
+
+
+# add playlist to user
+def add_playlist(user):
+    return connections.add_playlist(user)
+
+
+# return server response for add_playlist
+def get_res_add_playlist(playlist):
+    return get_response_ok(playlist)
+
+
+# return playlist from a server
+def get_playlist(user):
+    return connections.get_playlist(user)
+
+
+# return server response for empty list
+def get_res_empty_list():
+    return get_response_ok([])

@@ -20,21 +20,24 @@ class User:
 
     # return user
     def get_user(self):
-        return self.user
+        return {
+            'user_name': self.user['user_name'],
+            'user_password': self.user['user_password']
+        }
 
     # return user
     def get_user_for_print(self):
-        new_user = self.user
+        new_user = self.user.copy()
         new_user.pop('user_password')
         return new_user
 
     # add friend
-    def add_friend(self, friend):
-        self.user['friends'].append(friend)
+    def add_friend(self, friend_name):
+        self.user['friends'].append(friend_name)
         return self.get_user()
 
     # return copy of user with new key\value pair
     def add_item(self, key, value):
-        new_user = self.user.copy()
+        new_user = self.get_user()
         new_user[key] = value
         return new_user
