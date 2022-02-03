@@ -1,5 +1,4 @@
 import json
-from logic_layer import data
 from infra_layer import connections
 
 
@@ -8,9 +7,16 @@ def add_user(user):
     return connections.add_user(user)
 
 
+# return server response with data
+def get_response_ok(data):
+    obj = {'data': data,
+           'message': 'OK'}
+    return obj
+
+
 # return server response for add_user
 def get_res_add_user(user):
-    return data.res_ok_head + user["user_name"] + data.res_ok_bot
+    return get_response_ok(user["user_name"])
 
 
 # get user from system
@@ -20,7 +26,7 @@ def get_user(user):
 
 # return server response for get_user
 def get_res_get_user(user):
-    return data.res_ok_head + json.dump(user, sort_keys=True) + data.res_ok_bot
+    return get_response_ok(user)
 
 
 # delete all users from system
@@ -35,9 +41,13 @@ def add_friend(user):
 
 # return server response for add_user
 def get_res_add_friend(friend):
-    return data.res_ok_head + friend + data.res_ok_bot
+    return get_response_ok(friend)
 
 
 # change user password
 def change_password(user):
     return connections.change_password(user)
+
+
+def get_res_change_password(user):
+    return get_res_get_user(user)

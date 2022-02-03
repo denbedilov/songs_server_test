@@ -1,3 +1,5 @@
+import json
+
 
 class User:
     # initialize user for test
@@ -12,13 +14,19 @@ class User:
         else:
             self.user['friends'] = friends
         if playlists is None:
-            self.user['playlists'] = {}
+            self.user['playlists'] = []
         else:
             self.user['playlists'] = playlists
 
     # return user
     def get_user(self):
         return self.user
+
+    # return user
+    def get_user_for_print(self):
+        new_user = self.user
+        new_user.pop('user_password')
+        return new_user
 
     # add friend
     def add_friend(self, friend):
@@ -27,7 +35,6 @@ class User:
 
     # return copy of user with new key\value pair
     def add_item(self, key, value):
-        new_user = self.user
+        new_user = self.user.copy()
         new_user[key] = value
         return new_user
-
