@@ -1,3 +1,5 @@
+from logic_layer import data
+
 
 class User:
     user_name_field = 'user_name'
@@ -38,7 +40,9 @@ class User:
     # add friend
     def add_friend(self, friend_name):
         self.user[self.friends_field].append(friend_name)
-        return self.get_user()
+        res_user = self.get_user()
+        res_user[data.friend_field] = friend_name
+        return res_user
 
     # return copy of user with new key\value pair
     def add_item(self, key, value):

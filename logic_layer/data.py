@@ -16,6 +16,7 @@ assert_get_user = 'Get user not matched'
 
 # friend name to add friend
 friend_name = 'friend'
+friend_name2 = 'friend 2'
 friend_field = 'friend_name'
 
 # output for test failed
@@ -34,6 +35,7 @@ assert_change_password = 'Change Password not matched'
 # playlist to add
 playlist_field = 'playlist_name'
 playlist = 'playlist'
+playlist2 = 'playlist 2'
 
 # output for test failed
 assert_add_playlist = 'Add playlist not matched'

@@ -28,7 +28,7 @@ def test_get_user(remove_users):
 def test_add_friend(remove_users):
     user = User(data.user_name)
     assert asserts.add_user(user), data.assert_add_user
-    assert asserts.add_friend(user), data.assert_add_friend
+    assert asserts.add_friend(user, data.friend_name), data.assert_add_friend
     assert asserts.get_friend(user), data.assert_get_friend
 
 
@@ -64,7 +64,18 @@ def test_get_playlist(remove_users):
 
 @pytest.mark.sys_req
 @pytest.mark.users
-def test_two_same_users(remove_users):
+def test_add_same_user(remove_users):
     user = User(data.user_name)
     assert asserts.add_user(user), data.assert_add_user
     assert asserts.add_user(user, fail=True), data.assert_double_user
+
+
+@pytest.mark.sys_req
+@pytest.mark.users
+def test_get_full_user(remove_users):
+    user = User(data.user_name)
+    assert asserts.add_user(user), data.assert_add_user
+    assert asserts.add_friend(user, data.friend_name), data.assert_add_friend
+    assert asserts.add_friend(user, data.friend_name2), data.assert_add_friend
+    assert asserts.add_playlist(user, data.playlist), data.assert_add_playlist
+    assert asserts.add_playlist(user, data.playlist2), data.assert_add_playlist

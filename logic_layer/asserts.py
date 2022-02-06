@@ -17,13 +17,13 @@ def get_user(user):
            users.get_res_get_user(user.get_user_for_print())
 
 
-def add_friend(user):
-    return users.add_friend(user.add_item(data.friend_field, data.friend_name)) == \
-           users.get_res_add_friend(data.friend_name)
+def add_friend(user, friend_name):
+    return users.add_friend(user.add_friend(friend_name)) == \
+           users.get_res_add_friend(friend_name)
 
 
 def get_friend(user):
-    return users.get_user(user.add_friend(data.friend_name)) == \
+    return users.get_user(user.get_user()) == \
            users.get_res_get_user(user.get_user_for_print())
 
 
@@ -34,7 +34,7 @@ def change_password(user):
 
 def add_playlist(user, playlist):
     return users.add_playlist(user.add_item(data.playlist_field, playlist)) == \
-           users.get_res_add_playlist(data.playlist)
+           users.get_res_add_playlist(playlist)
 
 
 def get_playlist(user):
