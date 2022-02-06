@@ -1,4 +1,5 @@
 from infra_layer import connections
+from logic_layer import data
 
 
 # delete all users from system
@@ -50,3 +51,38 @@ def down_vote(song):
 # get server response for down vote
 def get_res_down_vote(song):
     return get_response_ok(song)
+
+
+# add three different rating songs
+def set_songs(songs):
+    res = connections.set_songs(songs)
+    if 'message' in res and res['message'] == 'OK':
+        return songs['songs']
+
+
+# return ranking songs
+def ranked_songs(rating, operator):
+    if 0 <= rating <= 10 and operator in data.rank_operators:
+        return connections.ranked_songs({
+            'rank': rating,
+            'op': operator})
+    return None
+
+
+# return server response for ranked songs
+def get_res_ranked_songs(songs_arr, rating, operator):
+    song_titles = []
+    if 0 <= rating <= 10 and operator in data.rank_operators:
+        if operator == 'less':
+            for song in songs_arr:
+                if song['rating'] < rating:
+                    song_titles.append(song['title'])
+        elif operator == 'eq':
+            for song in songs_arr:
+                if song['rating'] == rating:
+                    song_titles.append(song['title'])
+        elif operator == 'greater':
+            for song in songs_arr:
+                if song['rating'] > rating:
+                    song_titles.append(song['title'])
+    return get_response_ok(song_titles)

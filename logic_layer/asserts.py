@@ -54,3 +54,7 @@ def upvote_song(song, user, playlist):
 
 def down_vote_song(song, user, playlist):
     return songs.down_vote(song.get_down_vote_schema(user, playlist)) == songs.get_res_down_vote(song.get_rating())
+
+
+def ranked_songs(songs_arr, rating, operator):
+    return songs.ranked_songs(rating, operator) == songs.get_res_ranked_songs(songs_arr, rating, operator)

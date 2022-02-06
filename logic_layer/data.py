@@ -52,3 +52,36 @@ assert_upvote_song = 'Upvote not matched'
 
 # output for test failed
 assert_down_vote_song = 'Down vote not matched'
+
+# output for test failed
+assert_ranked_songs_less = 'Ranked songs less not matched'
+
+# output for test failed
+assert_ranked_songs_eq = 'Ranked songs eq not matched'
+
+# output for test failed
+assert_ranked_songs_greater = 'Ranked songs greater not matched'
+
+# three different rating songs to set
+three_dif_rating_songs = {
+    'songs': [{
+        "genre": "genre",
+        "performer": "performer",
+        "title": "song 1",
+        "year": 0,
+        "rating": 1},
+        {
+            "genre": "genre",
+            "performer": "performer",
+            "title": "song 2",
+            "year": 0,
+            "rating": 5},
+        {
+            "genre": "genre",
+            "performer": "performer",
+            "title": "song 3",
+            "year": 0,
+            "rating": 9}]}
+
+# operators for ranked songs
+rank_operators = ('less', 'eq', 'greater')
