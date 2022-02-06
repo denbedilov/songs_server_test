@@ -8,8 +8,7 @@ def add_user(user, fail=False):
         return users.add_user(user.get_user()) == \
                users.get_res_add_user(user.get_user())
     else:
-        return users.add_user(user.get_user()) == \
-               users.get_fail_res_add_user(user.get_user())
+        return 'error' in users.add_user(user.get_user())
 
 
 def get_user(user):
@@ -17,9 +16,12 @@ def get_user(user):
            users.get_res_get_user(user.get_user_for_print())
 
 
-def add_friend(user, friend_name):
-    return users.add_friend(user.add_friend(friend_name)) == \
-           users.get_res_add_friend(friend_name)
+def add_friend(user, friend_name, fail=False):
+    if not fail:
+        return users.add_friend(user.add_friend(friend_name)) == \
+               users.get_res_add_friend(friend_name)
+    else:
+        return 'error' in users.add_friend(user.add_friend(friend_name))
 
 
 def get_friend(user):
@@ -32,9 +34,12 @@ def change_password(user):
            users.get_res_change_password(user.get_user_for_print())
 
 
-def add_playlist(user, playlist):
-    return users.add_playlist(user.add_item(data.playlist_field, playlist)) == \
-           users.get_res_add_playlist(playlist)
+def add_playlist(user, playlist, fail=True):
+    if not fail:
+        return users.add_playlist(user.add_item(data.playlist_field, playlist)) == \
+               users.get_res_add_playlist(playlist)
+    else:
+        return 'error' in users.add_playlist(user.add_item(data.playlist_field, playlist))
 
 
 def get_playlist(user):

@@ -80,3 +80,7 @@ def get_response_fail(error):
 
 def get_fail_res_add_user(user):
     return get_response_fail('user with name ' + user[data.user_name_field] + ' already exists.')
+
+
+def get_fail_res_add_friend():
+    return get_response_fail('either the user name or the password are wrong')

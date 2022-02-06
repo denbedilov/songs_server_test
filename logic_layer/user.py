@@ -49,3 +49,7 @@ class User:
         new_user = self.get_user()
         new_user[key] = value
         return new_user
+
+    # set password
+    def set_password(self, password):
+        self.user[self.password_field] = password

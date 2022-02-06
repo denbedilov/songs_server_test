@@ -62,6 +62,7 @@ def test_get_playlist(remove_users):
     assert asserts.get_playlist(user), data.assert_get_playlist
 
 
+# test add same user
 @pytest.mark.sys_req
 @pytest.mark.users
 def test_add_same_user(remove_users):
@@ -70,6 +71,7 @@ def test_add_same_user(remove_users):
     assert asserts.add_user(user, fail=True), data.assert_double_user
 
 
+# test get users with all fields (at least two friends and two playlists)
 @pytest.mark.sys_req
 @pytest.mark.users
 def test_get_full_user(remove_users):
@@ -79,3 +81,34 @@ def test_get_full_user(remove_users):
     assert asserts.add_friend(user, data.friend_name2), data.assert_add_friend
     assert asserts.add_playlist(user, data.playlist), data.assert_add_playlist
     assert asserts.add_playlist(user, data.playlist2), data.assert_add_playlist
+
+
+# test all actions required password with no password
+@pytest.mark.sys_req
+@pytest.mark.users
+@pytest.mark.xfail
+def test_password_required(remove_users):
+    user = User(data.user_name, '')
+    # assert asserts.add_user(user, fail=True), data.assert_add_user
+    user.set_password(None)
+    assert asserts.add_user(user, fail=True), data.assert_add_user
+    user.set_password('pass')
+    assert asserts.add_user(user), data.assert_add_user
+    user.set_password('')
+    assert asserts.add_friend(user, data.friend_name, fail=True), data.assert_add_friend
+    user.set_password(None)
+    assert asserts.add_friend(user, data.friend_name, fail=True), data.assert_add_friend
+    user.set_password('pass')
+    assert asserts.add_friend(user, data.friend_name), data.assert_add_friend
+    user.set_password('')
+    assert asserts.add_playlist(user, data.playlist, fail=True), data.assert_add_playlist
+    user.set_password(None)
+    assert asserts.add_playlist(user, data.playlist, fail=True), data.assert_add_playlist
+    user.set_password('pass')
+    assert asserts.add_playlist(user, data.playlist), data.assert_add_playlist
+    # TODO: check pass change password
+    # TODO: check password get playlist
+    # TODO: check password upvote
+    # TODO: check password down vote
+    # TODO: check password add song to playlist
+
