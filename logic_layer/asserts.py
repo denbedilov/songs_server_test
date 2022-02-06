@@ -3,9 +3,13 @@ from logic_layer import data, users, songs, playlists
 # file for all assert functions
 
 
-def add_user(user):
-    return users.add_user(user.get_user()) == \
-           users.get_res_add_user(user.get_user())
+def add_user(user, fail=False):
+    if not fail:
+        return users.add_user(user.get_user()) == \
+               users.get_res_add_user(user.get_user())
+    else:
+        return users.add_user(user.get_user()) == \
+               users.get_fail_res_add_user(user.get_user())
 
 
 def get_user(user):

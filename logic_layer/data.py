@@ -88,3 +88,6 @@ rank_operators = ('less', 'eq', 'greater')
 
 # output for test failed
 assert_add_song_to_playlist = 'Add song to playlist not matched'
+
+# output for test failed
+assert_double_user = 'Add same user error not matched'

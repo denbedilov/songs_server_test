@@ -72,3 +72,11 @@ def get_playlist(user):
 # return server response for empty list
 def get_res_empty_list():
     return get_response_ok([])
+
+
+def get_response_fail(error):
+    return {'error': error}
+
+
+def get_fail_res_add_user(user):
+    return get_response_fail('user with name ' + user[data.user_name_field] + ' already exists.')

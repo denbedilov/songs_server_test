@@ -60,3 +60,11 @@ def test_get_playlist(remove_users):
     assert asserts.add_user(user), data.assert_add_user
     assert asserts.add_playlist(user, data.playlist), data.assert_add_playlist
     assert asserts.get_playlist(user), data.assert_get_playlist
+
+
+@pytest.mark.sys_req
+@pytest.mark.users
+def test_two_same_users(remove_users):
+    user = User(data.user_name)
+    assert asserts.add_user(user), data.assert_add_user
+    assert asserts.add_user(user, fail=True), data.assert_double_user
