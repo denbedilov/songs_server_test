@@ -57,3 +57,11 @@ class Song:
             self.api_schema['title']: self.song['title'],
             self.api_schema['rating']: self.song['rating']
         }
+
+    # return upvote schema with user and song
+    def get_down_vote_schema(self, user, playlist):
+        self.song['rating'] -= 1
+        schema = user.get_user()
+        schema[self.api_schema['title']] = self.song['title']
+        schema['playlist_name'] = playlist
+        return schema

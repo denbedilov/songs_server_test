@@ -131,3 +131,4 @@ dmypy.json
 logic_layer/local_main.py
 infra_layer/local_main.py
 test_layer/local_main.py
+test_log/

@@ -37,6 +37,16 @@ def upvote(song):
     return connections.up_vote(song)
 
 
-# get server response for get song
+# get server response for up vote
 def get_res_upvote(song):
+    return get_response_ok(song)
+
+
+# upvote song
+def down_vote(song):
+    return connections.down_vote(song)
+
+
+# get server response for down vote
+def get_res_down_vote(song):
     return get_response_ok(song)

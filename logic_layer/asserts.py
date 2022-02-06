@@ -50,3 +50,7 @@ def get_song(song):
 
 def upvote_song(song, user, playlist):
     return songs.upvote(song.get_upvote_schema(user, playlist)) == songs.get_res_upvote(song.get_rating())
+
+
+def down_vote_song(song, user, playlist):
+    return songs.down_vote(song.get_down_vote_schema(user, playlist)) == songs.get_res_down_vote(song.get_rating())
