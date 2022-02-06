@@ -128,5 +128,6 @@ dmypy.json
 # Pyre type checker
 .pyre/
 .idea/
+logic_layer/local_main.py
 infra_layer/local_main.py
 test_layer/local_main.py

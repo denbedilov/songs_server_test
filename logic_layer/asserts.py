@@ -46,3 +46,7 @@ def add_song(song):
 def get_song(song):
     return songs.get_song(song.get_get_song_schema()) == \
            songs.get_res_get_song(song.get_song())
+
+
+def upvote_song(song, user, playlist):
+    return songs.upvote(song.get_upvote_schema(user, playlist)) == songs.get_res_upvote(song.get_rating())

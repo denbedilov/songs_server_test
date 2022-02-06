@@ -46,3 +46,6 @@ assert_add_song = 'Add song not matched'
 
 # output for test failed
 assert_get_song = 'Get song not matched'
+
+# output for test failed
+assert_upvote_song = 'Upvote not matched'

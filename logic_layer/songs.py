@@ -30,3 +30,13 @@ def get_song(song):
 # get server response for get song
 def get_res_get_song(song):
     return get_response_ok(song)
+
+
+# upvote song
+def upvote(song):
+    return connections.up_vote(song)
+
+
+# get server response for get song
+def get_res_upvote(song):
+    return get_response_ok(song)
