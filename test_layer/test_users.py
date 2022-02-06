@@ -48,7 +48,7 @@ def test_change_password(remove_users):
 def test_add_playlist(remove_users):
     user = User(data.user_name)
     assert asserts.add_user(user), data.assert_add_user
-    assert asserts.add_playlist(user), data.assert_add_playlist
+    assert asserts.add_playlist(user, data.playlist), data.assert_add_playlist
     assert asserts.get_playlist(user), data.assert_get_playlist
 
 
@@ -58,5 +58,5 @@ def test_add_playlist(remove_users):
 def test_get_playlist(remove_users):
     user = User(data.user_name)
     assert asserts.add_user(user), data.assert_add_user
-    assert asserts.add_playlist(user), data.assert_add_playlist
+    assert asserts.add_playlist(user, data.playlist), data.assert_add_playlist
     assert asserts.get_playlist(user), data.assert_get_playlist

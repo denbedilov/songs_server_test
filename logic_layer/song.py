@@ -65,3 +65,7 @@ class Song:
         schema[self.api_schema['title']] = self.song['title']
         schema['playlist_name'] = playlist
         return schema
+
+    # return sons title
+    def get_title(self):
+        return self.song['title']

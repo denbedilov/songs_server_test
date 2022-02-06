@@ -1,4 +1,4 @@
-from logic_layer import data, users, songs
+from logic_layer import data, users, songs, playlists
 
 # file for all assert functions
 
@@ -28,8 +28,8 @@ def change_password(user):
            users.get_res_change_password(user.get_user_for_print())
 
 
-def add_playlist(user):
-    return users.add_playlist(user.add_item(data.playlist_field, data.playlist)) == \
+def add_playlist(user, playlist):
+    return users.add_playlist(user.add_item(data.playlist_field, playlist)) == \
            users.get_res_add_playlist(data.playlist)
 
 
@@ -58,3 +58,7 @@ def down_vote_song(song, user, playlist):
 
 def ranked_songs(songs_arr, rating, operator):
     return songs.ranked_songs(rating, operator) == songs.get_res_ranked_songs(songs_arr, rating, operator)
+
+
+def add_song_to_playlist(user, playlist_name, song_title):
+    return playlists.add_song(user, playlist_name, song_title) == playlists.get_res_add_song(song_title)

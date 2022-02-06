@@ -85,3 +85,6 @@ three_dif_rating_songs = {
 
 # operators for ranked songs
 rank_operators = ('less', 'eq', 'greater')
+
+# output for test failed
+assert_add_song_to_playlist = 'Add song to playlist not matched'
