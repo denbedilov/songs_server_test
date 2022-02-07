@@ -8,5 +8,21 @@
     test_users::test_password_required_upvote
     test_users::test_password_required_down_vote
     test_users::test_password_required_add_song_to_playlist
-4.
-
+4.  test_users::test_add_friend
+5.  test_users::test_get_full_user
+5a. test_users::test_same_playlist_for_two_users
+6.  test_users::test_vote_just_once
+7.  test_playlists::test_add_song_to_playlist
+    test_playlists::test_remove_song_from_playlist
+7a. test_songs::test_upvote_without_song
+    test_songs::test_down_vote_without_song
+    test_songs::test_get_song_without_song
+8.
+8a.
+8b.
+8c.
+9.
+10.
+11.
+12.
+13

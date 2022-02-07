@@ -51,3 +51,24 @@ def test_ranked_songs(remove_songs):
         assert asserts.ranked_songs(songs_arr, songs_arr[0]['rating']+1, 'less'), data.assert_ranked_songs_less
         assert asserts.ranked_songs(songs_arr, songs_arr[1]['rating'], 'eq'), data.assert_ranked_songs_eq
         assert asserts.ranked_songs(songs_arr, songs_arr[2]['rating']-1, 'greater'), data.assert_ranked_songs_greater
+
+
+@pytest.mark.xfail
+@pytest.mark.songs
+@pytest.mark.sys_req
+def test_upvote_without_song():
+    assert False, data.assert_test_does_not_exist
+
+
+@pytest.mark.xfail
+@pytest.mark.songs
+@pytest.mark.sys_req
+def test_down_vote_without_song():
+    assert False, data.assert_test_does_not_exist
+
+
+@pytest.mark.xfail
+@pytest.mark.songs
+@pytest.mark.sys_req
+def test_get_song_without_song():
+    assert False, data.assert_test_does_not_exist

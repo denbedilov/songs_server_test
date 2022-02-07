@@ -187,3 +187,12 @@ def test_password_required_add_song_to_playlist(remove_users):
     assert asserts.add_song_to_playlist(user, data.playlist, song.get_title(), fail=True), \
         data.assert_add_song_to_playlist
 
+
+@pytest.mark.sys_req
+@pytest.mark.users
+@pytest.mark.xfail
+def test_same_playlist_for_two_users(remove_users):
+    assert False, data.assert_test_does_not_exist
+
+
+

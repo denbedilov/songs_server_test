@@ -12,3 +12,10 @@ def test_add_song_to_playlist(remove_users, remove_songs):
     assert asserts.add_playlist(u, playlist_name), data.assert_add_playlist
     assert asserts.add_song(s), data.assert_add_song
     assert asserts.add_song_to_playlist(u, playlist_name, s.get_title()), data.assert_add_song_to_playlist
+
+
+@pytest.mark.skip(reason='endpoint does not supported')
+@pytest.mark.playlists
+@pytest.mark.sys_req
+def test_remove_song_from_playlist():
+    assert False

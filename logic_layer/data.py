@@ -99,3 +99,6 @@ assert_prepare_test = 'Prepare to test failed'
 
 # default song title
 default_song = 'song'
+
+# output for test does not exist
+assert_test_does_not_exist = 'Test does not exist'
