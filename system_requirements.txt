@@ -1,3 +1,12 @@
-1. test_users::test_add_same_user
-2. test_users::test_get_full_user
-3. test_users::test_password_required
+1.  test_users::test_add_same_user
+2.  test_users::test_get_full_user
+3.  test_users::test_password_required_add_user
+    test_users::test_password_required_add_friend
+    test_users::test_password_required_add_playlist
+    test_users::test_password_required_change_password
+    test_users::test_password_required_get_playlist
+    test_users::test_password_required_upvote
+    test_users::test_password_required_down_vote
+    test_users::test_password_required_add_song_to_playlist
+4.
+

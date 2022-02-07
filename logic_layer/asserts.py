@@ -29,12 +29,15 @@ def get_friend(user):
            users.get_res_get_user(user.get_user_for_print())
 
 
-def change_password(user):
-    return users.change_password(user.add_item(data.password_field, data.password)) == \
-           users.get_res_change_password(user.get_user_for_print())
+def change_password(user, password, fail=False):
+    if not fail:
+        return users.change_password(user.add_item(data.password_field, password)) == \
+               users.get_res_change_password(user.get_user_for_print())
+    else:
+        return 'error' in users.change_password(user.add_item(data.password_field, password))
 
 
-def add_playlist(user, playlist, fail=True):
+def add_playlist(user, playlist, fail=False):
     if not fail:
         return users.add_playlist(user.add_item(data.playlist_field, playlist)) == \
                users.get_res_add_playlist(playlist)
@@ -42,9 +45,12 @@ def add_playlist(user, playlist, fail=True):
         return 'error' in users.add_playlist(user.add_item(data.playlist_field, playlist))
 
 
-def get_playlist(user):
-    return users.get_playlist(user.add_item(data.playlist_field, data.playlist)) == \
-           users.get_res_empty_list()
+def get_playlist(user, fail=False):
+    if not fail:
+        return users.get_playlist(user.add_item(data.playlist_field, data.playlist)) == \
+               users.get_res_empty_list()
+    else:
+        return 'error' in users.get_playlist(user.add_item(data.playlist_field, data.playlist))
 
 
 def add_song(song):
@@ -57,17 +63,26 @@ def get_song(song):
            songs.get_res_get_song(song.get_song())
 
 
-def upvote_song(song, user, playlist):
-    return songs.upvote(song.get_upvote_schema(user, playlist)) == songs.get_res_upvote(song.get_rating())
+def upvote_song(song, user, playlist, fail=False):
+    if not fail:
+        return songs.upvote(song.get_upvote_schema(user, playlist)) == songs.get_res_upvote(song.get_rating())
+    else:
+        return 'error' in songs.upvote(song.get_upvote_schema(user, playlist))
 
 
-def down_vote_song(song, user, playlist):
-    return songs.down_vote(song.get_down_vote_schema(user, playlist)) == songs.get_res_down_vote(song.get_rating())
+def down_vote_song(song, user, playlist, fail=False):
+    if not fail:
+        return songs.down_vote(song.get_down_vote_schema(user, playlist)) == songs.get_res_down_vote(song.get_rating())
+    else:
+        return 'error' in songs.down_vote(song.get_down_vote_schema(user, playlist))
 
 
 def ranked_songs(songs_arr, rating, operator):
     return songs.ranked_songs(rating, operator) == songs.get_res_ranked_songs(songs_arr, rating, operator)
 
 
-def add_song_to_playlist(user, playlist_name, song_title):
-    return playlists.add_song(user, playlist_name, song_title) == playlists.get_res_add_song(song_title)
+def add_song_to_playlist(user, playlist_name, song_title, fail=False):
+    if not fail:
+        return playlists.add_song(user, playlist_name, song_title) == playlists.get_res_add_song(song_title)
+    else:
+        return 'error' in playlists.add_song(user, playlist_name, song_title)

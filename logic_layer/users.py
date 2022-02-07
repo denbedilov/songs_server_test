@@ -1,4 +1,4 @@
-from logic_layer import data
+from logic_layer import data, user as u, song as s, connections as con
 from infra_layer import connections
 
 
@@ -84,3 +84,24 @@ def get_fail_res_add_user(user):
 
 def get_fail_res_add_friend():
     return get_response_fail('either the user name or the password are wrong')
+
+
+# creating default user with default playlist and song in it as test prepare
+def create_user_with_playlist_and_song(user_name=data.user_name, password=data.password, playlist=data.password,
+                                       song=None):
+    if create_user_with_playlist(user_name, password, playlist):
+        if song is None:
+            song = s.Song()
+        if 'error' not in connections.add_song(song.get_add_song_schema()):
+            if 'error' not in con.add_song_to_playlist(user_name, password, playlist, song.get_title()):
+                return True
+    return False
+
+
+# creating default user with default playlist as test prepare
+def create_user_with_playlist(user_name=data.user_name, password=data.password, playlist=data.password):
+    user = u.User(user_name, password)
+    if 'error' not in connections.add_user(user.get_user()):
+        if 'error' not in connections.add_playlist(user.add_item(data.playlist_field, playlist)):
+            return True
+    return False

@@ -93,3 +93,9 @@ assert_add_song_to_playlist = 'Add song to playlist not matched'
 
 # output for test failed
 assert_double_user = 'Add same user error not matched'
+
+# output for test failed
+assert_prepare_test = 'Prepare to test failed'
+
+# default song title
+default_song = 'song'
