@@ -1,6 +1,7 @@
 import pytest
-from logic_layer import asserts, data, user, songs
+from logic_layer import asserts, data, songs, users
 from logic_layer.song import Song
+from logic_layer.user import User
 
 
 @pytest.mark.basic
@@ -22,7 +23,7 @@ def test_get_song(remove_songs):
 @pytest.mark.basic
 @pytest.mark.songs
 def test_upvote(remove_songs):
-    u = user.User('user')
+    u = User('user')
     s = Song()
     playlist = 'playlist'
     assert asserts.add_song(s), data.assert_add_song
@@ -33,7 +34,7 @@ def test_upvote(remove_songs):
 @pytest.mark.basic
 @pytest.mark.songs
 def test_down_vote(remove_songs):
-    u = user.User('user')
+    u = User('user')
     s = Song()
     playlist = 'playlist'
     assert asserts.add_song(s), data.assert_add_song
@@ -72,3 +73,12 @@ def test_down_vote_without_song():
 @pytest.mark.sys_req
 def test_get_song_without_song():
     assert False, data.assert_test_does_not_exist
+
+
+@pytest.mark.songs
+@pytest.mark.sys_req
+def test_rank_less_zero(remove_songs, remove_users):
+    users.create_user_with_playlist_and_song()
+    user = User(data.user_name)
+    song = Song()
+    assert asserts.down_vote_song(song, user, data.playlist), data.assert_down_vote_song

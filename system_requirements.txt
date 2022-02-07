@@ -17,11 +17,8 @@
 7a. test_songs::test_upvote_without_song
     test_songs::test_down_vote_without_song
     test_songs::test_get_song_without_song
-8.
-8a.
-8b.
-8c.
-9.
+8.  test_songs::test_ranked_songs
+9.  test_songs::test_rank_less_zero
 10.
 11.
 12.

@@ -87,7 +87,7 @@ def get_fail_res_add_friend():
 
 
 # creating default user with default playlist and song in it as test prepare
-def create_user_with_playlist_and_song(user_name=data.user_name, password=data.password, playlist=data.password,
+def create_user_with_playlist_and_song(user_name=data.user_name, password='pass', playlist=data.password,
                                        song=None):
     if create_user_with_playlist(user_name, password, playlist):
         if song is None:
@@ -99,7 +99,7 @@ def create_user_with_playlist_and_song(user_name=data.user_name, password=data.p
 
 
 # creating default user with default playlist as test prepare
-def create_user_with_playlist(user_name=data.user_name, password=data.password, playlist=data.password):
+def create_user_with_playlist(user_name=data.user_name, password='pass', playlist=data.password):
     user = u.User(user_name, password)
     if 'error' not in connections.add_user(user.get_user()):
         if 'error' not in connections.add_playlist(user.add_item(data.playlist_field, playlist)):
